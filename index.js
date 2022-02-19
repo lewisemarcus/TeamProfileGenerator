@@ -57,7 +57,7 @@ const prompts = [
         message: `Please enter the engineer's GitHub account: `,
         when: (answers) => { return answers.employeeRole == 'Engineer' },
         validate: (value) => {
-            if (value.trim().length != 0 || value.indexOf(' ') >=0) return true
+            if (value.trim().length != 0 && value.indexOf(' ') == -1) return true
             else return `Please enter a valid GitHub username for the employee: `
         }
     },
@@ -65,7 +65,11 @@ const prompts = [
         type: 'input',
         name: 'school',
         message: `Please enter the intern's school: `,
-        when: (answers) => { return answers.employeeRole == 'Intern' }
+        when: (answers) => { return answers.employeeRole == 'Intern' },
+        validate: (value) => {
+            if (typeof value == "string" && value.trim().length != 0) return true
+            else return `Please enter a valid School: `
+        }
     },
     {
         type: 'list',
