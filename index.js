@@ -1,6 +1,11 @@
 const inquirer = require('inquirer')
 const fs = require('fs')
-
+const Employee = require("./lib/employee.js")
+const Intern = require("./lib/intern.js")
+const Engineer = require("./lib/engineer.js")
+const Manager = require("./lib/manager.js")
+let empl, man, inte, eng
+const employeeList = []
 const prompts = [
     {
         type: 'input',
@@ -14,7 +19,7 @@ const prompts = [
     {
         type: 'input',
         name: 'employeeId',
-        message: `Plaese enter the employee's ID: `,
+        message: `Please enter the employee's ID: `,
         validate: (value) => {
             if (typeof value == "string" && value.trim().length != 0) return true
             else return `Invalid. Please enter an ID for the employee before continuing: `
@@ -39,13 +44,22 @@ const prompts = [
         type: 'input',
         name: 'managerNum',
         message: `Please enter the manager's phone number: `,
-        when: (answers) => { return answers.employeeRole == 'Manager' }
+        when: (answers) => { return answers.employeeRole == 'Manager' },
+        validate: (value) => {
+            if (value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) return true
+            else return `Please enter a valid phone number: `
+
+        }
     },
     {
         type: 'input',
         name: 'github',
         message: `Please enter the engineer's GitHub account: `,
-        when: (answers) => { return answers.employeeRole == 'Engineer' }
+        when: (answers) => { return answers.employeeRole == 'Engineer' },
+        validate: (value) => {
+            if (value.trim().length != 0 || value.indexOf(' ') >=0) return true
+            else return `Please enter a valid GitHub username for the employee: `
+        }
     },
     {
         type: 'input',
@@ -54,23 +68,42 @@ const prompts = [
         when: (answers) => { return answers.employeeRole == 'Intern' }
     },
     {
-        type: 'confirm',
+        type: 'list',
         name: 'addMore',
         message: `Would you like to add another employee? `,
+        choices: ['Yes', 'No']
     }
 ]
 
 function init() {
     inquirer.prompt(prompts)
         .then(function (answers) {
-            if (answers.addMore) return init()
+            switch (answers.employeeRole) {
+                case 'Employee':
+                    empl = new Employee(answers.employeeName, answers.employeeId, answers.employeeEmail)
+                    employeeList.push(empl)
+                    break
+                case 'Manager':
+                    man = new Manager(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.managerNum)
+                    employeeList.push(man)
+                    break
+                case 'Intern':
+                    inte = new Intern(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.school)
+                    employeeList.push(inte)
+                    break
+                case 'Engineer':
+                    eng = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.github)
+                    employeeList.push(eng)
+                    break
+            }
+            if (answers.addMore == 'Yes') return init()
             else {
                 const htmlFile = fs.createWriteStream(`index.html`, {
                     flags: 'a'
                 })
-                writeToFile(htmlFile, answers)
             }
-
+            console.log(employeeList)
+            //writeToFile(htmlFile, answers)
         })
 }
 
