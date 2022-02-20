@@ -102,7 +102,7 @@ function init() {
             }
             if (answers.addMore == 'Yes') return init()
             else {
-                const htmlFile = fs.createWriteStream(`index.html`, {
+                const htmlFile = fs.createWriteStream(`teampage.html`, {
                     flags: 'a'
                 })
             }
