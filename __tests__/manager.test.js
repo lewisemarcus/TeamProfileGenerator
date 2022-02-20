@@ -1,5 +1,11 @@
 const Manager = require("../lib/manager.js")
 
 test('Employee information', () => {
-    expect((Manager.getName())).toEqual((this.name))
+    let man = new Manager('Marcus Lewis', '11111', 'lewisemarcus@gmail.com','(800) 432-1000')
+
+    expect(man.getName()).toBe('Marcus Lewis')
+    expect(man.getId()).toBe('11111')
+    expect(man.getRole()).toBe('Manager')
+    expect(man.getEmail()).toBe('lewisemarcus@gmail.com')
+    expect(man.getOfficeNumber()).toBe('(800) 432-1000')
 })

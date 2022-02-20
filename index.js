@@ -4,6 +4,7 @@ const Employee = require("./lib/employee.js")
 const Intern = require("./lib/intern.js")
 const Engineer = require("./lib/engineer.js")
 const Manager = require("./lib/manager.js")
+const generateHtml = require("./src/generateHtml.js")
 let empl, man, inte, eng
 const employeeList = []
 const prompts = [
@@ -102,12 +103,12 @@ function init() {
             }
             if (answers.addMore == 'Yes') return init()
             else {
-                const htmlFile = fs.createWriteStream(`teampage.html`, {
+                const htmlFile = fs.createWriteStream(`./dist/teampage.html`, {
                     flags: 'a'
                 })
             }
             console.log(employeeList)
-            //writeToFile(htmlFile, answers)
+            //writeToFile(htmlFile, generateHtml.createFile(answers))
         })
 }
 
