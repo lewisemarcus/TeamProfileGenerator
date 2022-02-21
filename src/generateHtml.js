@@ -1,4 +1,5 @@
-let file = ``
+let file = ``, engineerCards = ``, internCards = ``, managerCards = ``, employeeCards = ``
+
 function htmlFormat() {
   file +=`<!doctype html>
   <html lang="en">
@@ -29,9 +30,10 @@ function htmlFormat() {
     `
   return file
 }
-//Formats each employee and appends to end of template literal. Template literal containing each 
+//Formats each employee and appends to end of template literal. employeeCards contains all employee cards.
 function employeeFormat(employeeList) {
-  let employeeCard = `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
+  for (let employee of employeeList) {
+    employeeCards += `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
     <div class="card-body">
       <h4 class="card-title">${employee.getName()}</h4>
       <h5 class="card-text">${employee.getRole()}</h5>
@@ -44,11 +46,13 @@ function employeeFormat(employeeList) {
   </div>
   
   `
-  return employeeCard
+  }
+  return employeeCards
 }
-//Formats each manager and appends to end of template literal. Template literal containing each 
-function managerFormat(manager) {
-  let managerCard = `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
+//Formats each manager and appends to end of template literal. managerCards contains all manager cards. 
+function managerFormat(managerList) {
+  for (let manager of managerList) {
+    managerCards += `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
     <div class="card-body">
       <h4 class="card-title">${manager.getName()}</h4>
       <h5 class="card-text">${manager.getRole()}</h5>
@@ -62,11 +66,13 @@ function managerFormat(manager) {
   </div>
 
 `
-  return managerCard
+  }
+  return managerCards
 }
-//Formats each engineer and appends to end of template literal. Template literal containing each 
+//Formats each engineer and appends to end of template literal. engineerCards contains all engineer cards.
 function engineerFormat(engineerList) {
-  let engineerCard = `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px;">
+  for (let engineer of engineerList) {
+    engineerCards += `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px;">
     <div class="card-body">
       <h4 class="card-title">${engineer.getName()}</h4>
       <h5 class="card-text">${engineer.getRole()}</h5>
@@ -81,11 +87,13 @@ function engineerFormat(engineerList) {
   </div>
   
   `
-  return engineerCard
+  }
+  return engineerCards
 }
-//Formats each intern and appends to end of template literal. Template literal containing each 
+//Formats each intern and appends to end of template literal. internCards contains all intern cards.
 function internFormat(internList) {
-  let internCard = `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
+  for (let intern of internList) {
+    internCards += `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
     <div class="card-body">
       <h4 class="card-title">${intern.getName()}</h4>
       <h5 class="card-text">${intern.getRole()}</h5>
@@ -99,24 +107,23 @@ function internFormat(internList) {
   </div>
   
   `
-  return internCard
+  }
+  return internCards
 }
 
 function endHtml() {
-  return `  </div>
-  </div>
-  </main>
+  endLines = `    </div>
+    </div>
+    </main>
   
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>`
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+  </html>`
+  return endLines
 }
 
-function fullFormat() {
-  return file
-}
 module.exports = { htmlFormat, employeeFormat, managerFormat, engineerFormat, internFormat, endHtml }

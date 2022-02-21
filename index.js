@@ -97,19 +97,19 @@ function init() {
             switch (answers.employeeRole) {
                 case 'Employee':
                     empl = new Employee(answers.employeeName, answers.employeeId, answers.employeeEmail)
-                    htmlFile.write(`${generateHtml.employeeFormat(empl)}`)
+                    employees.push(empl)                   
                     break
                 case 'Manager':
                     man = new Manager(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.managerNum)
-                    htmlFile.write(`${generateHtml.managerFormat(man)}`)
+                    managers.push(man)
                     break
                 case 'Intern':
                     inte = new Intern(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.school)
-                    htmlFile.write(`${generateHtml.internFormat(inte)}`)
+                    interns.push(inte)
                     break
                 case 'Engineer':
                     eng = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.github)
-                    htmlFile.write(`${generateHtml.engineerFormat(eng)}`)
+                    engineers.push(eng)
                     break
             }
             //Checks if user wants to continue adding more employees. Count changed to one to signify html file already created.
@@ -118,8 +118,12 @@ function init() {
                 return init()
             }
             else {
+                htmlFile.write(`${generateHtml.managerFormat(managers)}`)
+                htmlFile.write(`${generateHtml.engineerFormat(engineers)}`)
+                htmlFile.write(`${generateHtml.employeeFormat(employees)}`)
+                htmlFile.write(`${generateHtml.internFormat(interns)}`)
                 htmlFile.write(`${generateHtml.endHtml()}`)
-                return `HTML File generated!`
+                return console.log(`HTML File generated!`)
             }
         })
 }
