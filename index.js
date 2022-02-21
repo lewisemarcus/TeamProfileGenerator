@@ -5,8 +5,9 @@ const Intern = require("./lib/intern.js")
 const Engineer = require("./lib/engineer.js")
 const Manager = require("./lib/manager.js")
 const generateHtml = require("./src/generateHtml.js")
-let empl, man, inte, eng
+let empl, man, inte, eng, htmlFile, count = 0
 const employeeList = []
+//Prompt questions.
 const prompts = [
     {
         type: 'input',
@@ -31,6 +32,7 @@ const prompts = [
         name: 'employeeEmail',
         message: `Please enter the employee's email address: `,
         validate: (value) => {
+            //Regular expression to check if input is an email. 
             if (String(value).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) && value.trim().length != 0) return true
             else return `Invalid. Please enter an email address for the employee before continuing: `
         }
@@ -47,6 +49,7 @@ const prompts = [
         message: `Please enter the manager's phone number: `,
         when: (answers) => { return answers.employeeRole == 'Manager' },
         validate: (value) => {
+            //Regular expression to check if input is a phone number
             if (value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) return true
             else return `Please enter a valid phone number: `
 
@@ -83,40 +86,39 @@ const prompts = [
 function init() {
     inquirer.prompt(prompts)
         .then(function (answers) {
+            if (count == 0) {
+                //Instantiate new html file as write stream that is appendable.
+                htmlFile = fs.createWriteStream(`./dist/teampage.html`, { flags: 'a' })
+                //Clear previous html file.
+                fs.writeFile(htmlFile.path, '', function (error) { if (error) console.log(error) })
+                htmlFile.write(`${generateHtml.htmlFormat()}`)
+            }
+            //Switch method for each employee type. Employee is then appended to html file.
             switch (answers.employeeRole) {
                 case 'Employee':
                     empl = new Employee(answers.employeeName, answers.employeeId, answers.employeeEmail)
-                    employeeList.push(empl)
+                    htmlFile.write(`${generateHtml.employeeFormat(empl)}`)
                     break
                 case 'Manager':
                     man = new Manager(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.managerNum)
-                    employeeList.push(man)
+                    htmlFile.write(`${generateHtml.managerFormat(man)}`)
                     break
                 case 'Intern':
                     inte = new Intern(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.school)
-                    employeeList.push(inte)
+                    htmlFile.write(`${generateHtml.internFormat(inte)}`)
                     break
                 case 'Engineer':
                     eng = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.github)
-                    employeeList.push(eng)
+                    htmlFile.write(`${generateHtml.engineerFormat(eng)}`)
                     break
             }
-            if (answers.addMore == 'Yes') return init()
-            else {
-                const htmlFile = fs.createWriteStream(`./dist/teampage.html`, {
-                    flags: 'a'
-                })
+            //Checks if user wants to continue adding more employees. Count changed to one to signify html file already created.
+            if (answers.addMore == 'Yes') {
+                count = 1
+                return init()
             }
-            console.log(employeeList)
-            //writeToFile(htmlFile, generateHtml.createFile(answers))
+            else console.log(`Team page generated! Check your 'dist' folder for the file named 'teampage.html'.`)
         })
-}
-
-function writeToFile(fileName, data) {
-    //Empty previous HTML file.
-    fs.writeFile(fileName.path, data, function (error) {
-        error ? console.error(error) : console.log('Previous HTML Page cleared, generating new...\n Success!')
-    })
 }
 
 init()

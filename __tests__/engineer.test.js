@@ -1,8 +1,13 @@
 const Engineer = require("../lib/engineer.js")
+// jest.mock("../lib/engineer.js")
+
+// beforeEach(() => {
+//     Engineer.mockClear()
+// })
 
 test('Employee information', () => {
     let eng = new Engineer('Marcus Lewis', '11111', 'lewisemarcus@gmail.com','lewisemarcus')
-
+    
     expect(eng.getName()).toBe('Marcus Lewis')
     expect(eng.getId()).toBe('11111')
     expect(eng.getRole()).toBe('Engineer')
