@@ -28,6 +28,8 @@ THEN the user exits the application, and the HTML is generated
 
   - [Installation](#installation)
 
+  - [Walkthrough](#walkthrough)
+
   - [Usage](#usage)
 
   - [Author(s)](#author(s))
@@ -52,7 +54,8 @@ node index.js
 ```
 
   ## Walkthrough
-Here is a link to a video going over the steps to use the application: [Team Profile Generator Demo](https://www.youtube.com/watch?v=FgnxcUQ5vho)
+
+  Here is a link to a video going over the steps to use the application: [Team Profile Generator Demo](https://www.youtube.com/watch?v=3c-iBn73dDE)
 
   ## Usage
   
