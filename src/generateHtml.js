@@ -21,20 +21,32 @@ function htmlFormat() {
       </body>
     </html>`
 }
+//Formats each employee and appends to end of template literal. Template literal containing each 
+function employeeFormat(employeeList) {
+  for (let employee of employeeList) {
 
-function employeeFormat(employee) {
+  }
     return `Hello`
 }
+//Formats each manager and appends to end of template literal. Template literal containing each 
+function managerFormat(managerList) {
+  for (let manager of managerList) {
 
-function managerFormat(manager) {
+  }
     return `Goodbye`
 }
+//Formats each engineer and appends to end of template literal. Template literal containing each 
+function engineerFormat(engineerList) {
+  for (let engineer of engineerList) {
 
-function engineerFormat(engineer) {
-    return ``
+  }
+    return `Waddup`
 }
+//Formats each intern and appends to end of template literal. Template literal containing each 
+function internFormat(internList) {
+  for (let intern of internList) {
 
-function internFormat(intern) {
-    return ``
+  }
+    return `Late`
 }
 module.exports = {htmlFormat, employeeFormat, managerFormat, engineerFormat, internFormat}

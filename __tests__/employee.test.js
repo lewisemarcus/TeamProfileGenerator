@@ -1,6 +1,6 @@
 const Employee = require("../lib/employee.js")
 
-test('Employee information data is correct', () => {
+test('Test if Employee class returns correct information for each function: ', () => {
     let empl = new Employee('Marcus Lewis', '11111', 'lewisemarcus@gmail.com')
 
     expect(empl.getName()).toBe('Marcus Lewis')

@@ -6,7 +6,7 @@ const Engineer = require("./lib/engineer.js")
 const Manager = require("./lib/manager.js")
 const generateHtml = require("./src/generateHtml.js")
 let empl, man, inte, eng, htmlFile, count = 0
-const employeeList = []
+const employees = [], engineers = [], interns = [], managers = []
 //Prompt questions.
 const prompts = [
     {
@@ -93,23 +93,27 @@ function init() {
                 fs.writeFile(htmlFile.path, '', function (error) { if (error) console.log(error) })
                 htmlFile.write(`${generateHtml.htmlFormat()}`)
             }
-            //Switch method for each employee type. Employee is then appended to html file.
+            //Switch method for each employee type. Employee is pushed to its respective list type and is styled in generateHtml.
             switch (answers.employeeRole) {
                 case 'Employee':
                     empl = new Employee(answers.employeeName, answers.employeeId, answers.employeeEmail)
-                    htmlFile.write(`${generateHtml.employeeFormat(empl)}`)
+                    employees.push(empl)
+                    htmlFile.write(`${generateHtml.employeeFormat(employees)}`)
                     break
                 case 'Manager':
                     man = new Manager(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.managerNum)
-                    htmlFile.write(`${generateHtml.managerFormat(man)}`)
+                    managers.push(man)
+                    htmlFile.write(`${generateHtml.managerFormat(managers)}`)
                     break
                 case 'Intern':
                     inte = new Intern(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.school)
-                    htmlFile.write(`${generateHtml.internFormat(inte)}`)
+                    interns.push(inte)
+                    htmlFile.write(`${generateHtml.internFormat(interns)}`)
                     break
                 case 'Engineer':
                     eng = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.github)
-                    htmlFile.write(`${generateHtml.engineerFormat(eng)}`)
+                    engineers.push(eng)
+                    htmlFile.write(`${generateHtml.engineerFormat(engineers)}`)
                     break
             }
             //Checks if user wants to continue adding more employees. Count changed to one to signify html file already created.

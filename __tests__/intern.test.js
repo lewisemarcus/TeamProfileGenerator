@@ -1,6 +1,6 @@
 const Intern = require("../lib/intern.js")
 
-test('Employee information', () => {
+test('Test if Intern class returns correct information for each function: ', () => {
     let inte = new Intern('Marcus Lewis', '11111', 'lewisemarcus@gmail.com','UCI')
 
     expect(inte.getName()).toBe('Marcus Lewis')
