@@ -81,7 +81,7 @@ function engineerFormat(engineerList) {
       <li class="list-group-item">Email: <a href="mailto: ${engineer.getEmail()}">${engineer.getEmail()}</a>
       </li>
       <li class="list-group-item">ID: ${engineer.getId()}</li>
-      <li class="list-group-item"><a href="https://github.com/${engineer.getGithub()}" class="card-link">GitHub
+      <li class="list-group-item"><a href="https://github.com/${engineer.getGithub()} target="_blank"" class="card-link">GitHub
         Link</a></li>
     </ul>
   </div>
