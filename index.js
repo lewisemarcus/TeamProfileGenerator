@@ -97,23 +97,19 @@ function init() {
             switch (answers.employeeRole) {
                 case 'Employee':
                     empl = new Employee(answers.employeeName, answers.employeeId, answers.employeeEmail)
-                    employees.push(empl)
-                    htmlFile.write(`${generateHtml.employeeFormat(employees)}`)
+                    htmlFile.write(`${generateHtml.employeeFormat(empl)}`)
                     break
                 case 'Manager':
                     man = new Manager(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.managerNum)
-                    managers.push(man)
-                    htmlFile.write(`${generateHtml.managerFormat(managers)}`)
+                    htmlFile.write(`${generateHtml.managerFormat(man)}`)
                     break
                 case 'Intern':
                     inte = new Intern(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.school)
-                    interns.push(inte)
-                    htmlFile.write(`${generateHtml.internFormat(interns)}`)
+                    htmlFile.write(`${generateHtml.internFormat(inte)}`)
                     break
                 case 'Engineer':
                     eng = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.github)
-                    engineers.push(eng)
-                    htmlFile.write(`${generateHtml.engineerFormat(engineers)}`)
+                    htmlFile.write(`${generateHtml.engineerFormat(eng)}`)
                     break
             }
             //Checks if user wants to continue adding more employees. Count changed to one to signify html file already created.
@@ -121,7 +117,10 @@ function init() {
                 count = 1
                 return init()
             }
-            else console.log(`Team page generated! Check your 'dist' folder for the file named 'teampage.html'.`)
+            else {
+                htmlFile.write(`${generateHtml.endHtml()}`)
+                return `HTML File generated!`
+            }
         })
 }
 
