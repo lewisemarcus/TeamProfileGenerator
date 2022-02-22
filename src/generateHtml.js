@@ -25,7 +25,7 @@ function htmlFormat() {
     </header>
     <main>
     <div class="container">
-      <div class="row row-cols-2">
+      <div class="row row-cols-2 justify-content-center">
 
     `
   return file
