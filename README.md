@@ -55,7 +55,7 @@ node index.js
 
   ## Walkthrough
 
-  Here is a link to a video going over the steps to use the application: [Team Profile Generator Demo](https://www.youtube.com/watch?v=3c-iBn73dDE)
+  Here is a link to a video going over the steps to use the application: [Team Profile Generator Demo](https://youtu.be/0ZYOugy2mC0)
 
   ## Usage
   
