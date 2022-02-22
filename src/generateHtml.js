@@ -39,7 +39,7 @@ function employeeFormat(employeeList) {
       <h5 class="card-text" style="cursor: default">${employee.getRole()}</h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" style="padding-top: 20px; padding-bottom: 20px; cursor: default">Email: <a href="mailto: ${employee.employeeEmail}">${employee.getEmail()}</a>
+      <li class="list-group-item" style="padding-top: 20px; padding-bottom: 20px; cursor: default">Email: <a href="mailto: ${employee.getEmail()}">${employee.getEmail()}</a>
       </li>
       <li class="list-group-item" style="padding-top: 20px; padding-bottom: 20px; cursor: default">ID: ${employee.getId()}</li>
     </ul>
