@@ -23,7 +23,8 @@ const prompts = [
         name: 'employeeId',
         message: `Please enter the employee's ID: `,
         validate: (value) => {
-            if (value.contains("[0-9]+") && value.trim().length != 0) return true
+            //Regular expression to check if input contains only numbers
+            if (value.match(/^\d+$/) && value.trim().length != 0) return true
             else return `Invalid. Please enter an ID for the employee before continuing: `
         }
     },

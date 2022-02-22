@@ -18,7 +18,7 @@ function htmlFormat() {
       <div class="position-relative">
         <div class="p-3 mb-4 text-white bg-dark rounded-3">
           <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold text-center">Team Profile</h1>
+            <h1 class="display-5 fw-bold text-center" style="cursor: default">Team Profile</h1>
           </div>
         </div>
       </div>
@@ -35,13 +35,13 @@ function employeeFormat(employeeList) {
   for (let employee of employeeList) {
     employeeCards += `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
     <div class="card-body">
-      <h4 class="card-title">${employee.getName()}</h4>
-      <h5 class="card-text">${employee.getRole()}</h5>
+      <h4 class="card-title" style="cursor: default">${capitalizeFirstLetter(employee.getName())}</h4>
+      <h5 class="card-text" style="cursor: default">${employee.getRole()}</h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" style="padding-top: 20px; padding-bottom: 20px">Email: <a href="mailto: ${employee.employeeEmail}">${employee.getEmail()}</a>
+      <li class="list-group-item" style="padding-top: 20px; padding-bottom: 20px; cursor: default">Email: <a href="mailto: ${employee.employeeEmail}">${employee.getEmail()}</a>
       </li>
-      <li class="list-group-item" style="padding-top: 20px; padding-bottom: 20px">ID: ${employee.getId()}</li>
+      <li class="list-group-item" style="padding-top: 20px; padding-bottom: 20px; cursor: default">ID: ${employee.getId()}</li>
     </ul>
   </div>
   
@@ -54,13 +54,13 @@ function managerFormat(managerList) {
   for (let manager of managerList) {
     managerCards += `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
     <div class="card-body">
-      <h4 class="card-title">${manager.getName()}</h4>
-      <h5 class="card-text">${manager.getRole()}</h5>
+      <h4 class="card-title" style="cursor: default">${capitalizeFirstLetter(manager.getName())}</h4>
+      <h5 class="card-text" style="cursor: default">${manager.getRole()}</h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Email: <a href="mailto: ${manager.getEmail()}">${manager.getEmail()}</a>
+      <li class="list-group-item" style="cursor: default">Email: <a href="mailto: ${manager.getEmail()}">${manager.getEmail()}</a>
       </li>
-      <li class="list-group-item">ID: ${manager.getId()}</li>
+      <li class="list-group-item" style="cursor: default">ID: ${manager.getId()}</li>
       <li class="list-group-item">Phone Number: <a href="tel:${manager.getOfficeNumber()}">${manager.getOfficeNumber()}</a></li>
     </ul>
   </div>
@@ -74,13 +74,13 @@ function engineerFormat(engineerList) {
   for (let engineer of engineerList) {
     engineerCards += `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px;">
     <div class="card-body">
-      <h4 class="card-title">${engineer.getName()}</h4>
-      <h5 class="card-text">${engineer.getRole()}</h5>
+      <h4 class="card-title" style="cursor: default">${capitalizeFirstLetter(engineer.getName())}</h4>
+      <h5 class="card-text" style="cursor: default">${engineer.getRole()}</h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Email: <a href="mailto: ${engineer.getEmail()}">${engineer.getEmail()}</a>
+      <li class="list-group-item" style="cursor: default">Email: <a href="mailto: ${engineer.getEmail()}">${engineer.getEmail()}</a>
       </li>
-      <li class="list-group-item">ID: ${engineer.getId()}</li>
+      <li class="list-group-item" style="cursor: default">ID: ${engineer.getId()}</li>
       <li class="list-group-item"><a href="https://github.com/${engineer.getGithub()} target="_blank"" class="card-link">GitHub
         Link</a></li>
     </ul>
@@ -95,13 +95,13 @@ function internFormat(internList) {
   for (let intern of internList) {
     internCards += `<div class="card" style="width: 16rem; margin-left: 10px; margin-bottom: 10px">
     <div class="card-body">
-      <h4 class="card-title">${intern.getName()}</h4>
-      <h5 class="card-text">${intern.getRole()}</h5>
+      <h4 class="card-title" style="cursor: default">${capitalizeFirstLetter(intern.getName())}</h4>
+      <h5 class="card-text" style="cursor: default">${intern.getRole()}</h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Email: <a href="mailto: ${intern.getEmail()}">${intern.getEmail()}</a>
+      <li class="list-group-item" style="cursor: default">Email: <a href="mailto: ${intern.getEmail()}">${intern.getEmail()}</a>
       </li>
-      <li class="list-group-item">ID: ${intern.getId()}</li>
+      <li class="list-group-item" style="cursor: default">ID: ${intern.getId()}</li>
       <li class="list-group-item">School: ${intern.getSchool()}</li>
     </ul>
   </div>
@@ -124,6 +124,13 @@ function endHtml() {
   </body>
   </html>`
   return endLines
+}
+
+function capitalizeFirstLetter(string) {
+  string = string.split(' ')
+  string[0] = string[0].charAt(0).toUpperCase() + string[0].slice(1)
+  string[1] = string[1].charAt(0).toUpperCase() + string[1].slice(1)
+  return string.join(" ")
 }
 
 module.exports = { htmlFormat, employeeFormat, managerFormat, engineerFormat, internFormat, endHtml }
