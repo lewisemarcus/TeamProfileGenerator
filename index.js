@@ -6,6 +6,7 @@ const Engineer = require("./lib/engineer.js")
 const Manager = require("./lib/manager.js")
 const generateHtml = require("./src/generateHtml.js")
 let empl, man, inte, eng, htmlFile, count = 0
+const savedIds =[], savedEmails = [], savedNums = [], savedGits = []
 const employees = [], engineers = [], interns = [], managers = []
 //Prompt questions.
 const prompts = [
@@ -23,8 +24,12 @@ const prompts = [
         name: 'employeeId',
         message: `Please enter the employee's ID: `,
         validate: (value) => {
+            if (savedIds.includes(value)) return `ID already entered, please enter a unique ID.`
             //Regular expression to check if input contains only numbers
-            if (value.match(/^\d+$/) && value.trim().length != 0) return true
+            if (value.match(/^\d+$/) && value.trim().length != 0) {
+                savedIds.push(value)
+                return true
+            }
             else return `Invalid. Please enter an ID for the employee before continuing: `
         }
     },
@@ -33,8 +38,12 @@ const prompts = [
         name: 'employeeEmail',
         message: `Please enter the employee's email address: `,
         validate: (value) => {
+            if (savedEmails.includes(value)) return `Email already entered, please enter a unique email address.`
             //Regular expression to check if input is an email. 
-            if (String(value).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) && value.trim().length != 0) return true
+            if (String(value).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) && value.trim().length != 0) {
+                savedEmails.push(value)
+                return true
+            }
             else return `Invalid. Please enter an email address for the employee before continuing: `
         }
     },
@@ -50,8 +59,12 @@ const prompts = [
         message: `Please enter the manager's phone number: `,
         when: (answers) => { return answers.employeeRole == 'Manager' },
         validate: (value) => {
+            if (savedNums.includes(value)) return `Phone number already entered, please enter a unique phone number.`
             //Regular expression to check if input is a phone number
-            if (value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) return true
+            if (value.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+                savedNums.push(value)
+                return true
+            }
             else return `Please enter a valid phone number: `
 
         }
@@ -62,7 +75,12 @@ const prompts = [
         message: `Please enter the engineer's GitHub account: `,
         when: (answers) => { return answers.employeeRole == 'Engineer' },
         validate: (value) => {
-            if (value.trim().length != 0 && value.indexOf(' ') == -1) return true
+            if (savedGits.includes(value)) return `Account entered already. Please enter a unique GitHub account.`
+            //Regular expression check for github username compatibility.
+            if (value.trim().length != 0 && value.indexOf(' ') == -1 && value.match(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i)) {
+                savedGits.push(value)
+                return true
+            }
             else return `Please enter a valid GitHub username for the employee: `
         }
     },
