@@ -69,7 +69,9 @@ N/A
   
 ## Tests
   
-N/A
+``` 
+npm test
+```
 
   ## Contributing
  
