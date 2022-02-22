@@ -12,10 +12,10 @@ const prompts = [
     {
         type: 'input',
         name: 'employeeName',
-        message: `Enter the employee's name: `,
+        message: `Enter the employee's first and last name(separated by a space): `,
         validate: (value) => {
-            if (typeof value == "string" && value.trim().length != 0) return true
-            else return `Please enter a name for the employee before continuing: `
+            if (typeof value == "string" && value.trim().length != 0 && value.indexOf(' ') != -1) return true
+            else return `Please enter the first and last name for the employee before continuing: `
         }
     },
     {
