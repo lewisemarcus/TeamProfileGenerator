@@ -18,7 +18,7 @@ function htmlFormat() {
       <div class="position-relative">
         <div class="p-3 mb-4 text-white bg-dark rounded-3">
           <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold text-center">Company Team Profiles</h1>
+            <h1 class="display-5 fw-bold text-center">Team Profile</h1>
           </div>
         </div>
       </div>
