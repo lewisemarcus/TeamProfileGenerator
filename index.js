@@ -23,7 +23,7 @@ const prompts = [
         name: 'employeeId',
         message: `Please enter the employee's ID: `,
         validate: (value) => {
-            if (typeof value == "string" && value.trim().length != 0) return true
+            if (value.contains("[0-9]+") && value.trim().length != 0) return true
             else return `Invalid. Please enter an ID for the employee before continuing: `
         }
     },
