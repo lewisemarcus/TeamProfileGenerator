@@ -15,8 +15,9 @@ const prompts = [
         name: 'employeeName',
         message: `Enter the employee's first and last name(separated by a space): `,
         validate: (value) => {
+            if(value.split(' ').length != 2) return `Please enter a first and last name only.`
             if (typeof value == "string" && value.trim().length != 0 && value.indexOf(' ') != -1) return true
-            else return `Please enter the first and last name for the employee before continuing: `
+            else return `Please enter the first and last name for the employee before continuing. `
         }
     },
     {
@@ -30,7 +31,7 @@ const prompts = [
                 savedIds.push(value)
                 return true
             }
-            else return `Invalid. Please enter an ID for the employee before continuing: `
+            else return `Invalid. Please enter an ID for the employee before continuing. `
         }
     },
     {
@@ -44,7 +45,7 @@ const prompts = [
                 savedEmails.push(value)
                 return true
             }
-            else return `Invalid. Please enter an email address for the employee before continuing: `
+            else return `Invalid. Please enter an email address for the employee before continuing. `
         }
     },
     {
@@ -65,7 +66,7 @@ const prompts = [
                 savedNums.push(value)
                 return true
             }
-            else return `Please enter a valid phone number: `
+            else return `Please enter a valid phone number. `
 
         }
     },
@@ -81,7 +82,7 @@ const prompts = [
                 savedGits.push(value)
                 return true
             }
-            else return `Please enter a valid GitHub username for the employee: `
+            else return `Please enter a valid GitHub username for the employee. `
         }
     },
     {
@@ -91,7 +92,7 @@ const prompts = [
         when: (answers) => { return answers.employeeRole == 'Intern' },
         validate: (value) => {
             if (typeof value == "string" && value.trim().length != 0) return true
-            else return `Please enter a valid School: `
+            else return `Please enter a valid School. `
         }
     },
     {
