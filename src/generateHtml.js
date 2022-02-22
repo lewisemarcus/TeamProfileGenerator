@@ -126,6 +126,7 @@ function endHtml() {
   return endLines
 }
 
+//Capitalizes first letters of first and last name.
 function capitalizeFirstLetter(string) {
   string = string.split(' ')
   string[0] = string[0].charAt(0).toUpperCase() + string[0].slice(1)
