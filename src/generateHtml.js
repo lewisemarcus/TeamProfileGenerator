@@ -110,7 +110,7 @@ function internFormat(internList) {
   }
   return internCards
 }
-
+//End lines to close the elements from htmlFormat function.
 function endHtml() {
   endLines = `    </div>
     </div>
