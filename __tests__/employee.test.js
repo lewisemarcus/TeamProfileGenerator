@@ -16,7 +16,7 @@ describe('Employee class', () => {
     test('If no information is passed through, expect error', () => {
         const cb = () => new Employee()
         const error = new Error(
-            "Expected parameters 'name, id, email' to be a non empty strings."
+            "Expected parameters 'name, id, email' to be non empty strings."
         )
         expect(cb).toThrowError(error)
     })
