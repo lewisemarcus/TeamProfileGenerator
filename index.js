@@ -16,7 +16,7 @@ const prompts = [
         message: `Enter the employee's first and last name(separated by a space): `,
         validate: (value) => {
             if(value.split(' ').length != 2) return `Please enter a first and last name only.`
-            if (typeof value == "string" && value.trim().length != 0 && value.indexOf(' ') != -1) return true
+            if (typeof value == "string" && value.trim().length != 0 && value.indexOf(' ') != -1 && (/\d/.test(value) == false)) return true
             else return `Please enter the first and last name for the employee before continuing. `
         }
     },
